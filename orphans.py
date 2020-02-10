@@ -3,6 +3,7 @@ import shutil
 
 # Скрипт для обнаружения pipenv окружений-сирот (окружений, рабочих директорий для которых не существует)
 
+
 HOME_PATH = os.path.expanduser('~')
 VIRTUALENVS_PATH = '.local/share/virtualenvs'
 PIPENV_PROJECT_FILE = '.project'
