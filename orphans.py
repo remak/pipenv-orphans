@@ -3,7 +3,7 @@ import shutil
 
 # Скрипт для обнаружения pipenv окружений-сирот (окружений, рабочих директорий для которых не существует)
 
-HOME_PATH = '/home/mak'
+HOME_PATH = os.path.expanduser('~')
 VIRTUALENVS_PATH = '.local/share/virtualenvs'
 PIPENV_PROJECT_FILE = '.project'
 
@@ -13,14 +13,11 @@ envs_dir = os.path.join(HOME_PATH, VIRTUALENVS_PATH)
 def search_orphans(vituralenvs_dir):
     # Поиск окружений сирот среди всех имеющихся окружений
     envs_list = os.listdir(vituralenvs_dir)
-    projects_dirs = []
     envs_orphans = []
     for env in envs_list:
         env_project_file = os.path.join(HOME_PATH, VIRTUALENVS_PATH, env, PIPENV_PROJECT_FILE)
-        # print(os.path.exists(env_project_file))
         with open(env_project_file) as file:
             project_dir = file.read()
-            # print(os.path.exists(project_dir))
             if not os.path.exists(project_dir):
                 envs_orphans.append(env)
     return envs_orphans
